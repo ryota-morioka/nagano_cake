@@ -1,0 +1,13 @@
+<h1>注文情報入力</h1>
+
+<%= form_for(@order, url: orders_path) do |f| %>
+  <%= f.label :shipping_address_id %>
+  <%= f.collection_select :shipping_address_id, current_customer.shipping_addresses, :id, :full_address %>
+  <%= f.label :shipping_cost_id %>
+  <%= f.collection_select :shipping_cost_id, ShippingCost.all, :id, :price %>
+  <%= f.label :payment_method %>
+  <%= f.select :payment_method, Order.payment_methods.keys %>
+  <%= f.label :note %>
+  <%= f.text_area :note %>
+  <%= f.submit "次へ" %>
+<% end %>

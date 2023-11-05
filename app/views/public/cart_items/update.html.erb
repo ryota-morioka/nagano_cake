@@ -1,0 +1,7 @@
+<h1>カート内商品の数量変更</h1>
+
+<%= form_for(@cart_item, url: cart_item_path(@cart_item)) do |f| %>
+  <%= f.label :quantity %>
+  <%= f.number_field :quantity %>
+  <%= f.submit "更新" %>
+<% end %>

@@ -1,0 +1,5 @@
+<h1>カート内商品の全ての削除</h1>
+
+<p>本当に全て削除しますか？</p>
+
+<%= link_to "削除", cart_items_path, method: :delete, data: { confirm: "本当に全て削除しますか？" } %>

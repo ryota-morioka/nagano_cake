@@ -1,23 +1,55 @@
 Rails.application.routes.draw do
-# 顧客用
-# URL /customers/sign_in ...
-devise_for :customers, skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
-}
+  # 顧客用
+  # URL /customers/sign_in ...
+  devise_for :customers, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
 
-# 管理者用
-# URL /admin/sign_in ...
-devise_for :admin, skip: [:passwords], controllers: {
-  registrations: "admin/registrations",
-  sessions: "admin/sessions"
-}
-# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  scope module: :public do
+    root to: 'homes#top'
+    get "/about"=>"homes#about"
+    resources :items, only: [:index, :show]
+    resource :customers,only: [] do
+      get "mypage"=>"customers#show"
+      get "information/edit"=>"customers#edit"
+      patch "information"=>"customers#update"
+      get "confirm_withdraw"=>"customers#confirm_withdraw"
+      patch "withdrawal"=>"customers#withdrawal"
+      get 'lookup_address', to: 'customers#lookup_address'
+    end
+    resources :carts, only: [:index, :update, :create, :destroy] do
+      collection do
+        delete "destroy_all"=>"carts#destroy_all"
+      end
+    end
 
-  root to: 'public/homes#top'
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post "confirm"=>"orders#confirm"
+        get "order_finish"=>"orders#order_finish"
+        get 'lookup_address', to: 'orders#lookup_address'
+      end
+    end
+  end
 
-  get "/about", to: "public/homes#about", as: 'public_about'
-  get "/items", to: "public/items#index"
-  get "/items/:id", to: "public/items#show", as: :public_item
+
+  # 管理者用
+  # URL /admin/sign_in ...
+  devise_for :admin, skip: [:passwords], controllers: {
+    sessions: "admin/sessions"
+  }
+
+  namespace :admin do
+    root to: 'homes#top'
+    resources :items, except: [:destroy]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update] do
+      get "orders" => "customers#orders"
+    end
+  end
+
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
 
 end

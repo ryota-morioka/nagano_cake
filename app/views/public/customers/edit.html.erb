@@ -1,0 +1,7 @@
+<h1>登録情報編集</h1>
+
+<%= form_for(@customer, url: customer_path(@customer)) do |f| %>
+  <div class="field">
+    <%= f.label :名前 %>
+    <%= f.text_field :name %>
+  </div>

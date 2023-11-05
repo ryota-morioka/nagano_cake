@@ -24,4 +24,24 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def new
+  end
+
+  def create
+    customer = Customer.find_by(email: params[:email])
+    if customer&.authenticate(params[:password])
+      session[:customer_id] = customer.id
+      redirect_to root_path
+    else
+      flash[:danger] = "メールアドレスまたはパスワードが違います。"
+      render :new
+    end
+  end
+
+  def destroy
+    session[:customer_id] = nil
+    redirect_to root_path
+  end
+
 end
