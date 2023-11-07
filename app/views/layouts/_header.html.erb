@@ -16,7 +16,7 @@
             <% end %>
           </li>
           <li class="mr-2" onclick="stopTimer()">
-            <%= link_to products_path, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
+            <%= link_to itmes_path, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
               商品一覧
             <% end %>
           </li>
@@ -31,7 +31,7 @@
             <% end %>
           </li>
         </ul>
-        <div><%= render 'layouts/search' %></div>
+
       </div>
 
       <!--管理者側ログイン-->
@@ -54,17 +54,12 @@
             <% end %>
           </li>
           <li class="mr-2">
-            <%= link_to admin_genres_path, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
-              ジャンル一覧
-            <% end %>
-          </li>
-          <li class="mr-2">
             <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark btn btn-outline-secondary me-2' do %>
               ログアウト
             <% end %>
           </li>
         </ul>
-        <div><%= render 'layouts/search' %></div>
+
       </div>
 
       <!--顧客・管理者側ログアウト-->
@@ -92,9 +87,19 @@
             <% end %>
           </li>
         </ul>
-        <div><%= render 'layouts/search' %></div>
+
       </div>
       <% end %>
     </div>
   </nav>
+    <div class="container">  <!-- この行を追加 -->
+    <div class="row">      <!-- この行を追加 -->
+    <div class="col-3 float-right">
+    <th>
+    <div><%= render 'layouts/search' %></div>
+    </th>
+    </li>
+    </div>
+    </div>  <!-- この行を追加 -->
+    </div>    <!-- この行を追加 -->
 </header>

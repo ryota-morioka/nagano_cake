@@ -35,7 +35,6 @@
       <div class="field row mt-2">
         <p class="col-4">郵便番号(ハイフンなし)</p>
         <%= f.text_field :postcode, autofocus: true, value: @customer.postcode, placeholder: '郵便番号(ハイフンなし)' %>
-        <%= f.submit "検索",formaction: lookup_address_customers_path, formmethod: :get, class: "postcode_btn ml-2" %>
       </div>
 
       <div class="field row mt-2">
@@ -49,7 +48,7 @@
 
       <div class="field row mt-2">
         <p class="col-4">電話番号(ハイフンなし)</p>
-        <%= f.text_field :phone_number, autofocus: true, placeholder: '00000000000' %>
+        <%= f.text_field :telephone_number, autofocus: true, placeholder: '00000000000' %>
       </div>
 
       <div class="field row mt-2">

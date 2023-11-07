@@ -1,11 +1,11 @@
-<h1>商品一覧</h1>
+<div class="container py-5">
+  <div class="row mt-5">
+    <div class="col-md-3">
+    </div>
 
-<ul>
-  <% @items.each do |item| %>
-    <li>
-      <%= link_to item.name, item_path(item) %>
-      <br>
-      <%= item.price %>円
-    </li>
-  <% end %>
-</ul>
+    <div class="col-md-9">
+      <h4 class="ml-1">商品一覧<span class="small"> (全<%= @items_count %>件)</span></h4>
+      <%= render 'index', items: @items %>
+    </div>
+  </div>
+</div>
