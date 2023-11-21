@@ -8,9 +8,9 @@
     <% @customer.first_name = session[:customer]["first_name"] %>
     <% @customer.last_name_kana= session[:customer]["last_name_kana"] %>
     <% @customer.first_name_kana = session[:customer]["first_name_kana"] %>
-    <% @customer.postcode = session[:customer]["postcode"] %>
+    <% @customer.postal_code = session[:customer]["postal_code"] %>
     <% @customer.address = session[:customer]["address"] %>
-    <% @customer.phone_number = session[:customer]["phone_number"] %>
+    <% @customer.telphone_number = session[:customer]["telphone_number"] %>
     <% @customer.email = session[:customer]["email"] %>
   <% end %>
 
@@ -30,8 +30,8 @@
 
       <div class="field row mt-2">
         <p class="col-3">郵便番号</p>
-        <%= f.text_field :postcode, autofocus: true, value: @customer.postcode, placeholder: '0000000' %>
-        <%= f.submit "検索",formaction: lookup_address_customers_path, formmethod: :get, class: "postcode_btn ml-2" %>
+        <%= f.text_field :postal_code, autofocus: true, value: @customer.postal_code, placeholder: '0000000' %>
+        <%= f.submit "検索",formaction: lookup_address_customers_path, formmethod: :get, class: "postal_code_btn ml-2" %>
       </div>
 
       <div class="field row mt-2">
@@ -41,7 +41,7 @@
 
       <div class="field row mt-2">
         <p class="col-3">電話番号</p>
-        <%= f.text_field :phone_number, autofocus: true, value: @customer.phone_number, placeholder: '00000000000' %>
+        <%= f.text_field :telphone_number, autofocus: true, value: @customer.telphone_number, placeholder: '00000000000' %>
       </div>
 
       <div class="field row mt-2">
@@ -55,7 +55,7 @@
         <div class="col-1"></div>
         <%= link_to "退会する", unsubscribe_customers_path, class: "btn btn-sm btn-danger px-3" %>
       </div>
-
+      
       <% if session[:customer].present? %>
         <% session[:customer].clear %>
       <% end %>

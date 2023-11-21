@@ -23,7 +23,7 @@
           <% @items.each do |item| %>
           <div class="items mr-3">
             <%= link_to item_path(item.id) do %>
-              <%= image_tag item.get_image(180, 120), class: 'm-1 img-fluid'%>
+             <%= image_tag item.image.variant(resize: '180x120').processed, class: 'm-1 img-fluid' %>
             <% end %><br>
             <p class="item_name ml-1 mb-1"><%= item.name %></p>
             <span class="ml-1">¥<%=  item.price.to_s(:delimited) %></span>

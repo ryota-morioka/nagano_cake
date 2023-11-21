@@ -24,13 +24,6 @@
               <td><%= item.id %></td>
               <td><%= link_to item.name, admin_item_path(item.id) %></td>
               <td><%= item.price.to_s(:delimited)%></td>
-              <td>
-                <% if item.is_active == true %>
-                  <P class="text-success font-weight-bold">販売中</p>
-                <% else %>
-                  <P class="text-muted">販売停止中</p>
-                <% end %>
-              </td>
             </td>
           <% end %>
         </tbody>

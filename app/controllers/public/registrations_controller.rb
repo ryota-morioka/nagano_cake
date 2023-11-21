@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
-
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
-  def new
-    @customer = Customer.new
-  end
 
   # GET /resource/sign_up
   # def new
@@ -16,7 +11,18 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-  #   super
+  #   @customer = Customer.new(customer_params)
+  # if @customer.postal_code.present?
+  #   if @customer.save
+  #     # 保存が成功した場合の処理
+  #   else
+  #     # 保存が失敗した場合の処理
+  #   end
+  # else
+  #   flash[:error] = "郵便番号は必須です。"
+  #   render :new
+  # end
+  # #   super
   # end
 
   # GET /resource/edit
@@ -67,8 +73,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def after_sign_up_path_for(resource)
-    my_page_customers_path
+  def customer_params
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :postal_code, :address, :telephone_number, :password, :password_confirmation)
   end
 
+  def after_sign_up_path_for(resource)
+    mypage_customers_path
+  end
 end

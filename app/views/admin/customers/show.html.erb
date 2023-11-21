@@ -22,7 +22,7 @@
           </tr>
           <tr>
             <td class="font-weight-bold">郵便番号</td>
-            <td><%= @customer.postcode %></td>
+            <td><%= @customer.postal_code %></td>
           </tr>
           <tr>
             <td class="font-weight-bold">住所</td>
@@ -30,7 +30,7 @@
           </tr>
           <tr>
             <td class="font-weight-bold">電話番号</td>
-            <td><%= @customer.phone_number%></td>
+            <td><%= @customer.telephone_number%></td>
           </tr>
           <tr>
             <td class="font-weight-bold">メールアドレス</td>
@@ -39,7 +39,7 @@
           <tr>
             <td class="font-weight-bold">会員ステータス</td>
             <td>
-              <% if @customer.is_customer_deleted == false  %>
+              <% if @customer.is_active == false  %>
                 <p class="text-success font-weight-bold">有効</p>
               <% elsif %>
                 <p class="text-muted">退会</p>

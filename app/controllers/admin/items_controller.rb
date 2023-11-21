@@ -14,6 +14,7 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    @item.introduction = "商品の説明"
     if @item.save
       redirect_to admin_item_path(@item), notice: "商品を登録しました。"
     else

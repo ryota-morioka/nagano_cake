@@ -1,17 +1,21 @@
 class Item < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
+  validates :introduction, presence: true
 
   has_one_attached :image
 
-  def get_image(width, height)
-    unless image.attached?
-      file_path = Rails.root.join("app/assets/images/no_image.jpg")
-      image.attach(io: File.open(file_path), filename: "default-image.jpg", content_type: "image/jpeg")
+  def generate_variant_image(width, height)
+  # 画像をリサイズして変種を生成
+    if image.attached?
+      image.variant(resize_to_fill: [width, height], gravity: :center).processed
+    else
+      # 画像が添付されていない場合のデフォルト処理
+      default_image = Rails.root.join('app/assets/images/default-image.jpg')
+      image.attach(io: File.open(default_image), filename: "default-image.jpg", content_type: "image/jpeg")
+      image.variant(resize_to_fill: [width, height], gravity: :center).processed
     end
-    image.variant(resize_to_fill: [width, height], gravity: :center).processed
   end
-
   def with_tax_price
     tax = 1.1
     (price * tax).floor

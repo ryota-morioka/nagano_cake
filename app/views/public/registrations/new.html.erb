@@ -5,6 +5,7 @@
 
   <div class="col-12 registrations">
     <%= form_with model: @customer, url: customer_registration_path do |f| %>
+  <%= @customer.inspect %>
       <%= render "public/shared/error_messages", resource: resource %>
       <div class="field row mt-2">
         <p class="col-3">名前</p>
@@ -34,7 +35,7 @@
 
       <div class="field row mt-2">
         <p class="col-4">郵便番号(ハイフンなし)</p>
-        <%= f.text_field :postcode, autofocus: true, value: @customer.postcode, placeholder: '郵便番号(ハイフンなし)' %>
+        <%= f.text_field :postal_code, autofocus: true, value: @customer.postal_code, placeholder: '郵便番号(ハイフンなし)' %>
       </div>
 
       <div class="field row mt-2">

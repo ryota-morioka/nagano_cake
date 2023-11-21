@@ -3,13 +3,8 @@
     <% items.each do |item| %>
       <div class="item card mr-3 d-flex flex-column mb-4">
         <%= link_to item_path(item.id) do %>
-          <%= image_tag item.get_image(180, 120), class: 'm-1 img-fluid mb-1' %>
+          <%= image_tag item.generate_variant_image(180, 120), class: 'm-1 img-fluid mb-1' %>
           <div class="">
-          </div>
-          <div class="card-img-overlay">
-            <% if item.is_active == false %>
-              <div class="item_status m-1 text-center text-dark">品切れ中</div>
-            <% end %>
           </div>
           <p class="item_name ml-1 text-dark"><%= item.name %></p>
           <span class="ml-1 text-dark">¥<%= item.price.to_s(:delimited) %></span>

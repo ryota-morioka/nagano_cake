@@ -18,17 +18,17 @@ Rails.application.routes.draw do
       patch "withdrawal"=>"customers#withdrawal"
       get 'lookup_address', to: 'customers#lookup_address'
     end
-    resources :carts, only: [:index, :update, :create, :destroy] do
+    resources :cart_items, only: [:index, :update, :create, :destroy] do
       collection do
-        delete "destroy_all"=>"carts#destroy_all"
+        delete "destroy_all"=>"cart_items#destroy_all"
       end
     end
 
     resources :orders, only: [:new, :create, :index, :show] do
       collection do
-        post "confirm"=>"orders#confirm"
-        get "order_finish"=>"orders#order_finish"
-        get 'lookup_address', to: 'orders#lookup_address'
+        post 'orders/confirm' => 'orders#confirm'
+        get 'orders/thanks' => 'orders#thanks'
+        get 'recipient_address', to: 'orders#recipient_address'
       end
     end
   end
@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:passwords], controllers: {
+    registrations: "admin/registrations",
     sessions: "admin/sessions"
   }
 
@@ -47,6 +48,9 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update] do
       get "orders" => "customers#orders"
     end
+    resources :orders, only: [:show, :update]
+    resources :order_details, only: [:update]
+
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

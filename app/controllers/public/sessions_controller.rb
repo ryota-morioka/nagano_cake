@@ -2,6 +2,8 @@
 
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  before_action :reject_deleted_customer, only: [:create]
+
 
   # GET /resource/sign_in
   # def new
@@ -25,23 +27,26 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
-  def new
+ private
+
+  def after_sign_in_path_for(resource)
+    mypage_customers_path
   end
 
-  def create
-    customer = Customer.find_by(email: params[:email])
-    if customer&.authenticate(params[:password])
-      session[:customer_id] = customer.id
-      redirect_to root_path
-    else
-      flash[:danger] = "メールアドレスまたはパスワードが違います。"
-      render :new
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
+
+  protected
+
+  def reject_deleted_customer
+    @customer = Customer.find_by(email: params[:customer][:email])
+    if @customer
+      if @customer.valid_password?(params[:customer][:password]) && @customer.is_active == false
+        flash[:notice] = "退会済みのため再登録が必要となります。"
+        redirect_to new_customer_registration_path
+      end
     end
   end
-
-  def destroy
-    session[:customer_id] = nil
-    redirect_to root_path
-  end
-
 end

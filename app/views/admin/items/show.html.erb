@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="col-md-3 mt-3 text-center text-md-left">
-      <%= image_tag @item.get_image(200, 200) %>
+      <%= image_tag @item.generate_variant_image(200, 200) %>
     </div>
       <table class="table table-bordered mt-3 mt-md-0 col-md-8 offset-md-1">
         <tbody>
@@ -15,7 +15,7 @@
           </tr>
           <tr>
             <td>商品説明</td>
-            <td><%= @item.explanation %></td>
+            <td><%= @item.introduction %></td>
           </tr>
           <tr>
             <td>税込み価格（税抜価格）</htdd>
