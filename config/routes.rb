@@ -24,13 +24,12 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders, only: [:new, :create, :index, :show] do
-      collection do
+
+
         post 'orders/confirm' => 'orders#confirm'
         get 'orders/thanks' => 'orders#thanks'
         get 'recipient_address', to: 'orders#recipient_address'
-      end
-    end
+   resources :orders, only: [:new, :create, :index, :show]
   end
 
 

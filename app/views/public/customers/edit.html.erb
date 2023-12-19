@@ -2,6 +2,7 @@
   <div class="row">
     <h5 class="col-4 text-center">会員情報編集</h5>
   </div>
+</div>
 
   <% if session[:customer].present? %>
     <% @customer.last_name = session[:customer]["last_name"] %>
@@ -10,7 +11,7 @@
     <% @customer.first_name_kana = session[:customer]["first_name_kana"] %>
     <% @customer.postal_code = session[:customer]["postal_code"] %>
     <% @customer.address = session[:customer]["address"] %>
-    <% @customer.telphone_number = session[:customer]["telphone_number"] %>
+    <% @customer.telphone_number = session[:customer]["telephone_number"] %>
     <% @customer.email = session[:customer]["email"] %>
   <% end %>
 
@@ -41,7 +42,7 @@
 
       <div class="field row mt-2">
         <p class="col-3">電話番号</p>
-        <%= f.text_field :telphone_number, autofocus: true, value: @customer.telphone_number, placeholder: '00000000000' %>
+        <%= f.text_field :telephone_number, autofocus: true, value: @customer.telephone_number, placeholder: '00000000000' %>
       </div>
 
       <div class="field row mt-2">
@@ -53,9 +54,10 @@
         <div class="col-3"></div>
         <%= f.submit "編集内容を保存",class: "btn btn-sm btn-success mr-md-5" %>
         <div class="col-1"></div>
-        <%= link_to "退会する", unsubscribe_customers_path, class: "btn btn-sm btn-danger px-3" %>
+        <%= link_to "退会する", confirm_withdraw_customers_path, class: "btn btn-sm btn-danger px-3" %>
       </div>
-      
+      <% end %>
+  </div>
       <% if session[:customer].present? %>
         <% session[:customer].clear %>
       <% end %>

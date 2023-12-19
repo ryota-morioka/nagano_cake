@@ -7,14 +7,14 @@ class Order < ApplicationRecord
   validates :recipient_address, length: { in: 1..48 }
   validates :recipient_postal_code, format: { with: VALID_POSTCODE_REGEX }
   validates :recipient_name, length: { in: 1..32 }
-  validates :order_status, presence: true
+  # validates :order_status, presence: true
 
   has_many :order_details, dependent: :destroy
   belongs_to :customer
   has_many :items, through: :order_details
 
-  enum payment_option: {クレジットカード:0, 銀行振込:1}
-  enum order_status: {入金待ち:0, 入金確認:1, 製作中:2, 発送準備中:3, 発送済み:4}
+  enum payment_method: {クレジットカード:0, 銀行振込:1}
+  # enum order_status: {入金待ち:0, 入金確認:1, 製作中:2, 発送準備中:3, 発送済み:4}
 
 
   #@order.valid?を使用したいための、仮情報入力
