@@ -14,6 +14,7 @@ class Admin::CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     @customer.update(customer_params)
+    @customer.is_active = params[:customer][:is_customer_deleted]
     redirect_to admin_customer_path(@customer), notice: "会員情報を編集しました。"
   end
 

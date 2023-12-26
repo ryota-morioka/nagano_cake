@@ -62,10 +62,10 @@
         <div class="row field mt-2">
           <p class="col-2 font-weight-bold">会員ステータス</p>
           <div class="col-3">
-            <%= f.radio_button :is_customer_deleted, :false %>
-            <%= f.label :is_customer_deleted, '有効', value: false %>
             <%= f.radio_button :is_customer_deleted, :true %>
-            <%= f.label :is_customer_deleted, '退会', value: true %>
+            <%= f.label :is_customer_deleted, '有効', value: true %>
+            <%= f.radio_button :is_customer_deleted, :false %>
+            <%= f.label :is_customer_deleted, '退会', value: false %>
           </div>
         </div>
 

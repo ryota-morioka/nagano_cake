@@ -27,7 +27,7 @@
         <tbody>
           <tr>
             <td class="table-secondary">商品合計</td>
-            <td><%= @order.billing_amount - @order.shipping_fee %></td>
+            <td><%= @order.billing_amount %></td>
           </tr>
           <tr>
             <td class="table-secondary">配送料</td>
@@ -35,7 +35,7 @@
           </tr>
           <tr>
             <td class="table-secondary">ご請求額</td>
-            <td><%= @order.billing_amount %></td>
+            <td><%= @order.billing_amount + @order.shipping_fee %></td>
           </tr>
         </tbody>
       </table>
@@ -52,6 +52,16 @@
           <th class="table-secondary">小計</th>
         </tr>
       </thead>
+      <tbody>
+    <% @order.order_details.each do |order_detail| %>
+      <tr>
+        <td><%= order_detail.item.name %></td>
+        <td><%= order_detail.item.with_tax_price %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= order_detail.subtoal %></td>
+      </tr>
+    <% end %>
+     </tbody>
 
     </table>
   </div>

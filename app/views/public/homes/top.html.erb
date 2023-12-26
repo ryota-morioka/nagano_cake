@@ -26,7 +26,7 @@
              <%= image_tag item.image.variant(resize: '180x120').processed, class: 'm-1 img-fluid' %>
             <% end %><br>
             <p class="item_name ml-1 mb-1"><%= item.name %></p>
-            <span class="ml-1">¥<%=  item.price.to_s(:delimited) %></span>
+            <span class="ml-1">¥<%=  item.with_tax_price.to_s(:delimited) %></span>
           </div>
           <% end %>
         </div>

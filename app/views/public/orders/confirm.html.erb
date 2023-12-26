@@ -16,7 +16,8 @@
         <tr>
           <td><%= cart_item.item.name %></td>
           <td><%= cart_item.item.with_tax_price %></td>
-          <td><%= cart_item.subtotal %></td>
+          <td><%= cart_item.amount %></td> <!-- ここを修正 -->
+          <td><%= cart_item.item.with_tax_price * cart_item.amount %></td>
         </tr>
         <% @total += cart_item.subtotal %>
       <% end %>

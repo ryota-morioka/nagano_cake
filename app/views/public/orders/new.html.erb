@@ -12,9 +12,10 @@
       <%= f.radio_button :address_option, 0, checked: true, class: "ml-4"  %>ご自身の住所<br>
       <div class="ml-5"><%= "〒#{current_customer.postal_code} #{current_customer.address}" %></div>
       <div class="ml-5"><%= current_customer.last_name + current_customer.first_name  %></div>
-      
+
       <!--<div class="text-center mt-3">-->
-        <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+
+       <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
         <!--</div>-->
       <% end %>
   </div>
